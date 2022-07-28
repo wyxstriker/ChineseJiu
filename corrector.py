@@ -75,7 +75,7 @@ class CSCModel:
                     predict_list = predict[:, 1:-1]
                 mask_len += torch.sum(batch[1]) - 2*batch[1].size(0)
         output = self.tokenizer.decode(torch.flatten(predict_list)[:mask_len]).split(' ')
-        output = [sp_text[i] if output[i]=='あ' else output[i] for i in range(len(output))]
         res = self.__insert(output, sp_info)
+        output = [sp_text[i] if output[i]=='あ' else output[i] for i in range(len(output))]
         assert len(res) == len(text)
         return res
